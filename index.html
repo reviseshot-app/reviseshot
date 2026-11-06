@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ReviseShot — Smarter revision from your screenshots</title>
+<meta name="description" content="ReviseShot: a screenshot revision app for exam aspirants. Organise screenshots by subject, write on them, search them and revise.">
+<style>
+  :root{
+    --bg:#f6f8f5; --card:#ffffff; --ink:#1f2d33; --muted:#5f6f74; --line:#dde5df;
+    --accent:#3f9a85; --accent-ink:#ffffff; --soft:#e8f2ee;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent)}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+  header{padding:18px 0}
+  header .wrap{display:flex;align-items:center;justify-content:space-between}
+  .brand{font-weight:700;font-size:20px;letter-spacing:.2px}
+  .brand span{color:var(--accent)}
+  nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-size:15px}
+  nav a:hover{color:var(--ink)}
+  .hero{padding:48px 0 24px;display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
+  h1{font-size:42px;line-height:1.15;margin:0 0 14px}
+  .lead{font-size:18px;color:var(--muted);margin:0 0 26px}
+  .btns{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:13px 24px;border-radius:10px;font-weight:600;text-decoration:none;font-size:16px;border:1px solid transparent}
+  .btn.primary{background:var(--accent);color:var(--accent-ink)}
+  .btn.primary:hover{filter:brightness(.95)}
+  .btn.ghost{background:var(--card);color:var(--ink);border-color:var(--line)}
+  .note{font-size:13px;color:var(--muted);margin-top:12px}
+  .shot{border-radius:14px;border:1px solid var(--line);box-shadow:0 18px 40px rgba(31,45,51,.12);width:100%;background:#fff}
+  section{padding:44px 0}
+  h2{font-size:28px;margin:0 0 22px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{margin:0 0 6px;font-size:17px}
+  .card p{margin:0;color:var(--muted);font-size:15px}
+  .steps{counter-reset:s;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px 20px 64px;position:relative}
+  .step::before{counter-increment:s;content:counter(s);position:absolute;left:20px;top:20px;width:30px;height:30px;border-radius:50%;background:var(--soft);color:var(--accent);font-weight:700;display:flex;align-items:center;justify-content:center}
+  .step h3{margin:0 0 4px;font-size:16px}
+  .step p{margin:0;color:var(--muted);font-size:14.5px}
+  .price{background:var(--card);border:2px solid var(--accent);border-radius:16px;padding:28px;max-width:460px}
+  .amount{font-size:44px;font-weight:700}
+  .amount s{font-size:22px;color:var(--muted);font-weight:400;margin-left:8px}
+  .price ul{padding-left:20px;color:var(--muted)}
+  .faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px}
+  .faq summary{cursor:pointer;font-weight:600}
+  .faq p{color:var(--muted);margin:10px 0 0}
+  .policies{font-size:14px;color:var(--muted)}
+  .policies h3{color:var(--ink);font-size:16px;margin:22px 0 6px}
+  footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:14px}
+  @media (max-width:820px){
+    .hero{grid-template-columns:1fr}
+    h1{font-size:32px}
+    .grid,.steps{grid-template-columns:1fr}
+    nav a{margin-left:12px}
+  }
+</style>
+</head>
+<body>
+
+<!-- =====================================================================
+     EDIT ONLY THIS PART  (leave everything else as it is)
+     ===================================================================== -->
+<script>
+  const CONFIG = {
+    price:       "₹250",          // current price
+    oldPrice:    "₹399",         // crossed-out price (for an offer). Use "" to hide it
+    downloadUrl: "https://github.com/reviseshot-app/reviseshot/releases/latest/download/ReviseShot.zip",            // GitHub Release zip link (Step 4)
+    buyUrl:      "https://pages.razorpay.com/pl_TwiHAsDI7X7tnh/view",            // Razorpay Payment Page link (Step 6)
+    email:       "reviseshotsupport@gmail.com",
+    whatsapp:    "",             // e.g. "919876543210" (91 + number). Leave "" to hide it
+    ownerName:   "Sunil Kumar Meena",    // shown in the policies
+    city:        "Kota, Rajasthan"
+  };
+</script>
+<!-- ===================================================================== -->
+
+<header>
+  <div class="wrap">
+    <div class="brand">Revise<span>Shot</span></div>
+    <nav><a href="#features">Features</a><a href="#how">How to buy</a><a href="#price">Price</a><a href="#faq">FAQ</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <h1>Turn your screenshots into a revision notebook</h1>
+      <p class="lead">Built for exam aspirants. Keep current affairs, wrong answers and formulas organised by subject, write on them, and find any of them with one search.</p>
+      <div class="btns">
+        <a class="btn primary" id="buyTop" href="#">Buy — <span class="js-price"></span></a>
+        <a class="btn ghost" id="dlTop" href="#">Download free trial (Windows)</a>
+      </div>
+      <p class="note">Free trial for 10 days or 25 photos. Like it? Pay once, use it forever. One license = one PC.</p>
+    </div>
+    <img class="shot" src="screenshot-1.png" alt="ReviseShot app screenshot" onerror="this.style.display='none'">
+  </div>
+
+  <section id="features">
+    <h2>Features</h2>
+    <div class="grid">
+      <div class="card"><h3>One-key capture</h3><p>Press Ctrl+Alt+X, select part of the screen, and the screenshot goes straight into the app.</p></div>
+      <div class="card"><h3>Subject-wise folders</h3><p>Polity, History, Quant… a separate section for each subject. Switch with Ctrl+1–9.</p></div>
+      <div class="card"><h3>Text search (OCR)</h3><p>Search for any word inside your screenshots and jump straight to that image.</p></div>
+      <div class="card"><h3>Write with a pen</h3><p>Highlight and take notes with a mouse or stylus, even in the empty space beside the image.</p></div>
+      <div class="card"><h3>Date-wise calendar</h3><p>See what you studied on each day and revise from the calendar.</p></div>
+      <div class="card"><h3>Offline &amp; private</h3><p>No internet needed. Your data stays on your PC.</p></div>
+    </div>
+  </section>
+
+  <section id="how">
+    <h2>How to buy (3 minutes)</h2>
+    <div class="steps">
+      <div class="step"><h3>Download</h3><p>Download and extract the zip, then run <b>ReviseShot.exe</b>. The app shows your <b>Machine Code</b>.</p></div>
+      <div class="step"><h3>Pay</h3><p>Click "Buy" in the app (your Machine Code is filled in), add your email, and pay with UPI.</p></div>
+      <div class="step"><h3>Activate</h3><p>Your License Key arrives by email/WhatsApp within a few hours. Paste it into the app — done!</p></div>
+    </div>
+  </section>
+
+  <section id="price">
+    <h2>Price</h2>
+    <div class="price">
+      <div class="amount"><span class="js-price"></span><s class="js-old"></s></div>
+      <ul>
+        <li>Lifetime license — no monthly fees</li>
+        <li>All features + free updates</li>
+        <li>1 license = 1 PC</li>
+      </ul>
+      <a class="btn primary" id="buyMid" href="#">Buy now</a>
+    </div>
+  </section>
+
+  <section id="faq" class="faq">
+    <h2>FAQ</h2>
+    <details><summary>What does the free trial include?</summary><p>All features for 10 days or 25 photos, whichever comes first. After that you need a license.</p></details>
+    <details><summary>Does it work on Mac or mobile?</summary><p>Not yet — Windows 10/11 only.</p></details>
+    <details><summary>Where do I find my Machine Code?</summary><p>It appears in the activation window when you open the app. The "Buy" button fills it in for you, or click "Copy" and paste it into the payment form.</p></details>
+    <details><summary>Windows says "Windows protected your PC". Is it safe?</summary><p>Yes. Windows shows this for new apps from small developers. Click <b>More info</b> and then <b>Run anyway</b>.</p></details>
+    <details><summary>Can I use it on another PC?</summary><p>No. One license is for one PC. Another PC needs its own license.</p></details>
+    <details><summary>What if I reinstall Windows?</summary><p>Your Machine Code changes. Contact us with your payment ID and we will help.</p></details>
+    <details><summary>How soon will I get my key?</summary><p>Usually within a few hours (orders after 10 PM are handled the next morning).</p></details>
+  </section>
+
+  <section id="policies" class="policies">
+    <h2>Policies</h2>
+    <h3>Contact</h3>
+    <p><span class="js-owner"></span>, <span class="js-city"></span>. Email: <a class="js-mail" href="#"></a><span class="js-wa-wrap"> · WhatsApp: <a class="js-wa" href="#"></a></span></p>
+    <h3>Terms</h3>
+    <p>Each license is for one PC and may not be resold or shared. The software is provided "as is".</p>
+    <h3>Refund policy</h3>
+    <p>You can try the app free before buying. Licenses are non-refundable once the key has been sent. If your key does not work, contact us within 7 days and we will fix it or refund you.</p>
+    <h3>Privacy</h3>
+    <p>At checkout we collect only your email, phone number and Machine Code, and use them only to issue your license. Your screenshots and notes never leave your PC.</p>
+  </section>
+</main>
+
+<footer><div class="wrap">© <span id="yr"></span> ReviseShot</div></footer>
+
+<script>
+  const $ = s => document.querySelectorAll(s);
+  $(".js-price").forEach(e => e.textContent = CONFIG.price);
+  $(".js-old").forEach(e => e.textContent = CONFIG.oldPrice);
+  ["buyTop", "buyMid"].forEach(id => document.getElementById(id).href = CONFIG.buyUrl);
+  document.getElementById("dlTop").href = CONFIG.downloadUrl;
+  $(".js-owner").forEach(e => e.textContent = CONFIG.ownerName);
+  $(".js-city").forEach(e => e.textContent = CONFIG.city);
+  $(".js-mail").forEach(e => { e.textContent = CONFIG.email; e.href = "mailto:" + CONFIG.email; });
+  if (CONFIG.whatsapp) {
+    $(".js-wa").forEach(e => { e.textContent = "+" + CONFIG.whatsapp; e.href = "https://wa.me/" + CONFIG.whatsapp; });
+  } else {
+    $(".js-wa-wrap").forEach(e => e.style.display = "none");
+  }
+  document.getElementById("yr").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
